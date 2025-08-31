@@ -1,0 +1,10 @@
+^C:\USERS\KAIDEN ENGLE\CODE\OPENGL-TRI\BUILD\CMAKEFILES\3D77196E9522D6989A2DE240C6DA53D3\GENERATE.STAMP.RULE
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" "-SC:/Users/Kaiden Engle/code/OpenGL-Tri" "-BC:/Users/Kaiden Engle/code/OpenGL-Tri/build" --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file "C:/Users/Kaiden Engle/code/OpenGL-Tri/build/hello_window.sln"
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

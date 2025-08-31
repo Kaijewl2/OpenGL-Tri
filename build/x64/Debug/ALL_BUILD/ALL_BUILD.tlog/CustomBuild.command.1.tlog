@@ -1,0 +1,10 @@
+^C:\USERS\KAIDEN ENGLE\CODE\OPENGL-TRI\CMAKELISTS.TXT
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" "-SC:/Users/Kaiden Engle/code/OpenGL-Tri" "-BC:/Users/Kaiden Engle/code/OpenGL-Tri/build" --check-stamp-file "C:/Users/Kaiden Engle/code/OpenGL-Tri/build/CMakeFiles/generate.stamp"
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

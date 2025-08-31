@@ -1,0 +1,3 @@
+C:/Users/Kaiden Engle/code/OpenGL-Tri/build/CMakeFiles/hello_window.dir
+C:/Users/Kaiden Engle/code/OpenGL-Tri/build/CMakeFiles/ALL_BUILD.dir
+C:/Users/Kaiden Engle/code/OpenGL-Tri/build/CMakeFiles/ZERO_CHECK.dir
