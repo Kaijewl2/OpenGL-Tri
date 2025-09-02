@@ -99,6 +99,9 @@ int main() {
         1, 2, 3 // Second triangle
     };
 
+    // Create Buffer Objects
+
+    // Declare Buffer Objects
     unsigned int VAO, VBO, EBO;
     glGenVertexArrays(1, &VAO);
     glGenBuffers(1, &VBO);
@@ -115,8 +118,8 @@ int main() {
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
     glEnableVertexAttribArray(0);
 
-    glBindBuffer(GL_ARRAY_BUFFER, 0);
-    glBindVertexArray(0);
+    glBindBuffer(GL_ARRAY_BUFFER, 0); // Bind VBO
+    glBindVertexArray(0); // Bind VAO
 
 
     while(!glfwWindowShouldClose(window)) {
