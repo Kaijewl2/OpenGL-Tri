@@ -1,7 +1,6 @@
-
-
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
+#include <IMG_Loader/stb_image.h>
 
 #include <shader_s.h>
 
@@ -43,9 +42,19 @@ int main()
         return -1;
     }
 
+    int width, height, nrChannels;
+    unsigned char *data = stbi_load("awesomeface.png", &width, &height, &nrChannels, 0);
+
+    unsigned int texture;
+    glGenTextures(1, &texture);
+    glBindTexture(GL_TEXTURE_2D, texture);
+
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+    glGenerateMipmap(GL_TEXTURE_2D);
+
     // build and compile our shader program
     // ------------------------------------
-    Shader ourShader("C:/Users/Kaiden Engle/code/OpenGL-Tri/src/3.3.shader.vs", "C:/Users/Kaiden Engle/code/OpenGL-Tri/src/3.3.shader.fs"); // you can name your shader files however you like
+    Shader ourShader("C:/Users/Kaiden Engle/code/OpenGL-Tri/src/3.3.shader.vs", "C:/Users/Kaiden Engle/code/OpenGL-Tri/src/3.3.shader.fs");
 
     // set up vertex data (and buffer(s)) and configure vertex attributes
     // ------------------------------------------------------------------
@@ -55,6 +64,23 @@ int main()
         -0.5f, -0.5f, 0.0f,  0.0f, 1.0f, 0.0f,  // bottom left
          0.0f,  0.5f, 0.0f,  0.0f, 0.0f, 1.0f   // top 
     };
+
+    float textureCoords[] = {
+        0.0f, 0.0f, // Lower left
+        0.5f, 1.0f, // Upper middle
+        1.0f, 0.0f, // Lower right
+    };
+
+    // Setting wrap method
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_MIRRORED_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_MIRRORED_REPEAT);
+
+    // Setting filtering method
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+
+    // Setting mipmap method
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
     unsigned int VBO, VAO;
     glGenVertexArrays(1, &VAO);
