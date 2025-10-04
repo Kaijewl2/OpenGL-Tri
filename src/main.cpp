@@ -221,9 +221,20 @@ int main()
     // translate and rotate matrix
         glm::mat4 trans = glm::mat4(1.0f);
         
-        if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
-            //trans = glm::translate(trans, glm::vec3(0.5f, -0.5f, 0.0f));
+        if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS){
+            trans = glm::translate(trans, glm::vec3(0.0f, 0.7f, 0.0f));
             trans = glm::rotate(trans, (float)glfwGetTime(), glm::vec3(0.0f, 0.0f, 1.0f));
+        }else if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS){
+            trans = glm::translate(trans, glm::vec3(0.7f, 0.0f, 0.0f));
+            trans = glm::rotate(trans, (float)glfwGetTime(), glm::vec3(0.0f, 0.0f, 1.0f));
+        }else if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS){
+            trans = glm::translate(trans, glm::vec3(-0.7f, 0.0f, 0.0f));
+            trans = glm::rotate(trans, (float)glfwGetTime(), glm::vec3(0.0f, 0.0f, 1.0f));
+        }else if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS){
+            trans = glm::translate(trans, glm::vec3(0.0f, -0.7f, 0.0f));
+            trans = glm::rotate(trans, (float)glfwGetTime(), glm::vec3(0.0f, 0.0f, 1.0f));
+        }
+
 
     unsigned int transformLoc = glGetUniformLocation(ourShader.ID, "transform");
     glUniformMatrix4fv(transformLoc, 1, GL_FALSE, glm::value_ptr(trans));
