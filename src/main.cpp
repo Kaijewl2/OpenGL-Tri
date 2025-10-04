@@ -3,6 +3,8 @@
 #define STB_IMAGE_IMPLEMENTATION
 #include <IMG_Loader/stb_image.h>
 #include <glm/glm/glm.hpp>
+#include <glm/glm/gtc/matrix_transform.hpp>
+#include <glm/glm/gtc/type_ptr.hpp>
 #include <primitives/vertex.h>
 
 #include <shader_s.h>
@@ -64,11 +66,13 @@ int main()
         // top right
         glm::vec3(0.5f, 0.5f, 0.0f),  
         glm::vec3(1.0f, 0.0f, 0.0f),  
-        1.0f, 1.0f,
-    // bottom right
+        2.0f, 2.0f,
+        
+        // bottom right
         glm::vec3(0.5f,  -0.5f, 0.0f),  
         glm::vec3(0.0f, 1.0f, 0.0f),  
-        1.0f, 0.0f,
+        2.0f, 0.0f,
+
         // bottom left
         glm::vec3(-0.5f, -0.5f, 0.0f),  
         glm::vec3(0.0f, 0.0f, 1.0f),  
@@ -77,9 +81,7 @@ int main()
         // top left
         glm::vec3(-0.5f, 0.5f, 0.0f),  
         glm::vec3(1.0f, 1.0f, 0.0f),  
-        0.0f, 1.0f,
-        
-        
+        0.0f, 2.0f,
         
     };
 
@@ -134,8 +136,8 @@ int main()
     
     // setting wrap method (on current bound texture object)
     
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_MIRRORED_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_MIRRORED_REPEAT);
     
     // Setting filtering method (on current bound texture object)
     
@@ -212,8 +214,19 @@ int main()
 
         // render
        
+        
         glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
+
+    // translate and rotate matrix
+        glm::mat4 trans = glm::mat4(1.0f);
+        
+        if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
+            //trans = glm::translate(trans, glm::vec3(0.5f, -0.5f, 0.0f));
+            trans = glm::rotate(trans, (float)glfwGetTime(), glm::vec3(0.0f, 0.0f, 1.0f));
+
+    unsigned int transformLoc = glGetUniformLocation(ourShader.ID, "transform");
+    glUniformMatrix4fv(transformLoc, 1, GL_FALSE, glm::value_ptr(trans));
 
         // render the container
 
