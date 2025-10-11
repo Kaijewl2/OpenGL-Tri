@@ -111,12 +111,17 @@ int main()
     };
     
     glm::vec3 cubePositions[] = {
-        glm::vec3(0.0f, 0.0f, 0.0f),
-        glm::vec3(2.8f, -4.3f, -15.0f),
-        glm::vec3(-2.8f, 1.3f, 12.0f),
-        glm::vec3(4.5f, -2.4f, -15.0f),
-        glm::vec3(5.6f, -8.1f, -5.4f)
+        glm::vec3(-0.5f, 0.3f, 0.0f),
+        glm::vec3(0.8f, -0.3f, -1.0f),
+        glm::vec3(0.8f, -0.5f, -2.3f),
+        glm::vec3(0.5f, -0.4f, -2.2f),
+        glm::vec3(1.2f, -0.1f, -2.4f),
+        glm::vec3(0.8f, -0.5f, 0.3f),
+        glm::vec3(1.5f, 0.4f, -3.2f),
+        glm::vec3(2.2f, 3.1f, -2.4f)
     };
+
+    int cubePosSize = sizeof(cubePositions) / sizeof(cubePositions[0]);
     
     unsigned int VBO, VAO, EBO;
     glGenVertexArrays(1, &VAO);
@@ -227,6 +232,9 @@ int main()
 
     glEnable(GL_DEPTH_TEST);
 
+    glm::mat4 projection = glm::perspective(glm::radians(45.0f), (float)SCR_WIDTH / (float)SCR_WIDTH, 0.1f, 100.0f);
+    ourShader.setMat4("projection", projection);
+
     // render loop
     
     while (!glfwWindowShouldClose(window))
@@ -235,39 +243,72 @@ int main()
         processInput(window);
 
         // render
-        // ------
+        
         glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         // bind textures on corresponding texture units
+        
         glActiveTexture(GL_TEXTURE0);
         glBindTexture(GL_TEXTURE_2D, texture1);
         glActiveTexture(GL_TEXTURE1);
         glBindTexture(GL_TEXTURE_2D, texture2);
   
         // activate shader
+        
         ourShader.use();
       
-        // create transformations
-        glm::mat4 view          = glm::mat4(1.0f);
-        glm::mat4 projection    = glm::mat4(1.0f);
-        projection = glm::perspective(glm::radians(45.0f), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
-        view  = glm::translate(view, glm::vec3(0.0f, 0.0f, -3.0f));
-        ourShader.setMat4("projection", projection);
+        glm::vec3 cameraPos = glm::vec3(0.0f, 0.0f, 3.0f);
+
+        glm::vec3 cameraTarget = glm::vec3(0.0f, 0.0f, 0.0f);
+        glm::vec3 cameraDirection = glm::normalize(cameraPos - cameraTarget);
+
+        glm::vec3 up = glm::vec3(0.0f, 1.0f, 0.0f);
+        glm::vec3 cameraRight = glm::normalize(glm::cross(up, cameraDirection));
+        glm::vec3 cameraUp = glm::cross(cameraDirection, cameraRight);
+
+        // LookAt Matrix
+        
+        glm::mat4 view;
+        const float radius = 10.0f;
+        float camX = sin(glfwGetTime()) * radius;
+        float camZ = cos(glfwGetTime()) * radius;
+        
+        view = glm::lookAt(glm::vec3(camX, 0.0f, camZ),
+                           glm::vec3(0.0f, 0.0f, 0.0f),
+                           glm::vec3(0.0f, 1.0f, 0.0f));
+
         ourShader.setMat4("view", view);
 
         glBindVertexArray(VAO);
-        for(unsigned int i = 0; i < 5; i++){
+        
+        for(unsigned int i = 0; i < cubePosSize; i++){
+
             glm::mat4 model = glm::mat4(1.0f);
             model = glm::translate(model, cubePositions[i]);
-            float angle = 20.0f * i;
-            model = glm::rotate(model, glm::radians(angle), glm::vec3(1.0f, 0.3f, 0.5f));
+
+            float angle = 20.0f;
+            
+            model = glm::rotate(model, glm::radians(angle) * (float)glfwGetTime(), glm::vec3(-1.0f, 6.3f, 2.5f));
+            
             ourShader.setMat4("model", model);
 
             glDrawArrays(GL_TRIANGLES, 0, 36);
+
         }
-        // glfw: swap buffers and poll IO events (keys pressed/released, mouse moved etc.)
-        // -------------------------------------------------------------------------------
+        if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS){
+            cubePositions[0].z -=0.0005;
+        }if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS){
+            cubePositions[0].z +=0.0005;
+        }if (glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS){
+            cubePositions[0].y +=0.0005;
+        }if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS){
+            cubePositions[0].x +=0.0005;
+        }if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS){
+            cubePositions[0].x -=0.0005;
+        }if (glfwGetKey(window, GLFW_KEY_C) == GLFW_PRESS){
+            cubePositions[0].y -=0.0005;
+        }
         glfwSwapBuffers(window);
         glfwPollEvents();
     }
