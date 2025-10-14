@@ -35,6 +35,9 @@ float lastX = 800.0f / 2.0f;
 float lastY = 600.0 / 2.0;
 float fov = 45.0f;
 
+float playerVeloY = 0.0f;
+bool onGround = false;
+
 int main()
 {
     // glfw: initialize and configure
@@ -358,32 +361,43 @@ int main()
         glBindBuffer(GL_ARRAY_BUFFER, VBO);
         glBufferData(GL_ARRAY_BUFFER, sizeof(tyVertices), tyVertices, GL_STATIC_DRAW);
         float xPos = 0.0f;
-        float yPos = 0.0f;
+        float zPos = 0.0f;
+        glm::vec3 modelPos;
+
+        float gravity = -9.8f;
+        float playerHeight = 1.8f;
+
+        playerVeloY += gravity * deltaTime;
+        cameraPos.y += playerVeloY * deltaTime;
+
+        float blockTopY = 2.0f;
         
-            for(unsigned int i = 0; i < 10; i++){
-
+        for(unsigned int i = 0; i < 10; i++){
+            zPos = 0.0f;
+            for(unsigned int j = 0; j < 10; j++){
+                glm::vec3 modelPos = glm::vec3(xPos, 1.0f, zPos);
                 glm::mat4 model = glm::mat4(1.0f);
-                model = glm::translate(model, glm::vec3(xPos, 1.0f, 3.0f));
+                model = glm::translate(model, modelPos);
 
                 ourShader.setMat4("model", model);
 
                 glDrawArrays(GL_TRIANGLES, 0, 36);
 
-                xPos += 1.0f;
+                zPos += 1.0f;
+            
+                glm::vec3 blockPos = glm::vec3(i, 1.0f, j);
 
-                for(unsigned int j = 0; j < 10; j++){
-
-
-                glm::mat4 model = glm::mat4(1.0f);
-                model = glm::translate(model, glm::vec3(xPos, yPos, 3.0f));
-
-                ourShader.setMat4("model", model);
-
-                glDrawArrays(GL_TRIANGLES, 0, 36);
-
-                yPos += 1.0f;
-
+                if(cameraPos.x > blockPos.x - 0.5f && cameraPos.x < blockPos.x + 0.5f &&
+                cameraPos.z > blockPos.z - 0.5f && cameraPos.z < blockPos.z + 0.5f &&
+                cameraPos.y <= blockTopY + 0.1f && playerVeloY <= 0.0f){
+                        
+                    onGround = true;
+                    cameraPos.y = blockTopY;
+                    playerVeloY = 0.0f;
+                    break; 
             }
+        }
+            xPos += 1.0f;
         }
 
         glfwSwapBuffers(window);
@@ -412,7 +426,7 @@ void processInput(GLFWwindow *window)
     if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
         glfwSetWindowShouldClose(window, true);
 
-    const float cameraSpeed = 6.5f * deltaTime;
+    const float cameraSpeed = 10.5f * deltaTime;
     if(glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
         cameraPos += cameraSpeed * cameraFront;
     if(glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
@@ -421,10 +435,15 @@ void processInput(GLFWwindow *window)
         cameraPos -= glm::normalize(glm::cross(cameraFront, cameraUp)) * cameraSpeed;
     if(glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
         cameraPos += glm::normalize(glm::cross(cameraFront, cameraUp)) * cameraSpeed;
-    if(glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS)
-        cameraPos += cameraUp * cameraSpeed;
+    //if(glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS)
+        //cameraPos += cameraUp * cameraSpeed;
     if(glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS)
         cameraPos += cameraDown * cameraSpeed;
+
+    if(glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS && onGround){
+        playerVeloY = 5.0f;
+        onGround == false;
+    }
 }
 
 // glfw: whenever the window size changed (by OS or user resize) this callback function executes
