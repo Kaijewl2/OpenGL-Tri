@@ -120,48 +120,48 @@ int main()
         -0.5f,  0.5f, -0.5f,  0.0f, 1.0f
     };
 
-    float tyVertices[] = {
-        -0.5f, -0.5f, -0.5f,  0.0f, 0.0f,
-        0.5f, -0.5f, -0.5f,  0.0f, 0.0f,
-        0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
-        0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
-        -0.5f,  0.5f, -0.5f,  0.0f, 1.0f,
-        -0.5f, -0.5f, -0.5f,  0.0f, 0.0f,
+    float groundVertices[] = {
+        -10.5f, -0.5f, -10.5f,  0.0f, 0.0f,
+        10.5f, -0.5f, -10.5f,  0.0f, 0.0f,
+        10.5f,  0.5f, -10.5f,  1.0f, 1.0f,
+        10.5f,  0.5f, -10.5f,  1.0f, 1.0f,
+        -10.5f,  0.5f, -10.5f,  0.0f, 1.0f,
+        -10.5f, -0.5f, -10.5f,  0.0f, 0.0f,
 
-        -0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
-        0.5f, -0.5f,  0.5f,  1.0f, 0.0f,
-        0.5f,  0.5f,  0.5f,  0.3f, 1.0f,
-        0.5f,  0.5f,  0.5f,  0.7f, 0.0f,
-        -0.5f,  0.5f,  0.5f,  0.0f, 1.0f,
-        -0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
+        -10.5f, -0.5f,  10.5f,  0.0f, 0.0f,
+        10.5f, -0.5f,  10.5f,  1.0f, 0.0f,
+        10.5f,  0.5f,  10.5f,  0.3f, 1.0f,
+        10.5f,  0.5f,  10.5f,  0.7f, 0.0f,
+        -10.5f,  0.5f,  10.5f,  0.0f, 1.0f,
+        -10.5f, -0.5f,  10.5f,  0.0f, 0.0f,
 
-        -0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
-        -0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
-        -0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
-        -0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
-        -0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
-        -0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+        -10.5f,  0.5f,  10.5f,  1.0f, 0.0f,
+        -10.5f,  0.5f, -10.5f,  1.0f, 1.0f,
+        -10.5f, -0.5f, -10.5f,  0.0f, 1.0f,
+        -10.5f, -0.5f, -10.5f,  0.0f, 1.0f,
+        -10.5f, -0.5f,  10.5f,  0.0f, 0.0f,
+        -10.5f,  0.5f,  10.5f,  1.0f, 0.0f,
 
-        0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
-        0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
-        0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
-        0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
-        0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
-        0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+        10.5f,  0.5f,  10.5f,  1.0f, 0.0f,
+        10.5f,  0.5f, -10.5f,  1.0f, 1.0f,
+        10.5f, -0.5f, -10.5f,  0.0f, 1.0f,
+        10.5f, -0.5f, -10.5f,  0.0f, 1.0f,
+        10.5f, -0.5f,  10.5f,  0.0f, 0.0f,
+        10.5f,  0.5f,  10.5f,  1.0f, 0.0f,
 
-        -0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
-        0.5f, -0.5f, -0.5f,  1.0f, 1.0f,
-        0.5f, -0.5f,  0.5f,  1.0f, 0.0f,
-        0.5f, -0.5f,  0.5f,  1.0f, 0.0f,
-        -0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
-        -0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
+        -10.5f, -0.5f, -10.5f,  0.0f, 1.0f,
+        10.5f, -0.5f, -10.5f,  1.0f, 1.0f,
+        10.5f, -0.5f,  10.5f,  1.0f, 0.0f,
+        10.5f, -0.5f,  10.5f,  1.0f, 0.0f,
+        -10.5f, -0.5f,  10.5f,  0.0f, 0.0f,
+        -10.5f, -0.5f, -10.5f,  0.0f, 1.0f,
 
-        -0.5f,  0.5f, -0.5f,  0.0f, 1.0f,
-        0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
-        0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
-        0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
-        -0.5f,  0.5f,  0.5f,  0.0f, 0.0f,
-        -0.5f,  0.5f, -0.5f,  0.0f, 1.0f
+        -10.5f,  0.5f, -10.5f,  0.0f, 1.0f,
+        10.5f,  0.5f, -10.5f,  1.0f, 1.0f,
+        10.5f,  0.5f,  10.5f,  1.0f, 0.0f,
+        10.5f,  0.5f,  10.5f,  1.0f, 0.0f,
+        -10.5f,  0.5f,  10.5f,  0.0f, 0.0f,
+        -10.5f,  0.5f, -10.5f,  0.0f, 1.0f
     };
 
     unsigned int indices[] = {
@@ -234,7 +234,7 @@ int main()
    
     int width, height, nrChannels;
     stbi_set_flip_vertically_on_load(true);
-    unsigned char *data = stbi_load("C:/Users/Kaiden Engle/code/OpenGL-Tri/resources/textures/TyCam.png", &width, &height, &nrChannels, 0);
+    unsigned char *data = stbi_load("C:/Users/Kaiden Engle/code/OpenGL-Tri/resources/textures/TerryDavis.png", &width, &height, &nrChannels, 0);
     if(data){
         if(nrChannels == 4)
             glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
@@ -271,7 +271,7 @@ int main()
     // load image, create texture, and generate mipmaps
     //stbi_set_flip_vertically_on_load(true);
     
-    data = stbi_load("C:/Users/Kaiden Engle/code/OpenGL-Tri/resources/textures/Fatsten.png", &width, &height, &nrChannels, 0);
+    data = stbi_load("C:/Users/Kaiden Engle/code/OpenGL-Tri/resources/textures/TerryDavis.png", &width, &height, &nrChannels, 0);
     if(data){
         if(nrChannels == 4)
             glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
@@ -339,27 +339,11 @@ int main()
         ourShader.setMat4("view", view);        
 
         glBindVertexArray(VAO);
-        
-        for(unsigned int i = 0; i < cubePosSize; i++){
-
-            glm::mat4 model = glm::mat4(1.0f);
-            model = glm::translate(model, cubePositions[i]);
-
-            float angle = 20.0f;
-            
-            model = glm::rotate(model, glm::radians(angle) * (float)glfwGetTime(), glm::vec3(-1.0f, 6.3f, 2.5f));
-            
-            ourShader.setMat4("model", model);
-
-            glDrawArrays(GL_TRIANGLES, 0, 36);
-
-        }
 
         glActiveTexture(GL_TEXTURE0);
         glBindTexture(GL_TEXTURE_2D, texture2);
 
-        glBindBuffer(GL_ARRAY_BUFFER, VBO);
-        glBufferData(GL_ARRAY_BUFFER, sizeof(tyVertices), tyVertices, GL_STATIC_DRAW);
+        glBufferData(GL_ARRAY_BUFFER, sizeof(groundVertices), groundVertices, GL_STATIC_DRAW);
         float xPos = 0.0f;
         float zPos = 0.0f;
         glm::vec3 modelPos;
@@ -369,36 +353,16 @@ int main()
 
         playerVeloY += gravity * deltaTime;
         cameraPos.y += playerVeloY * deltaTime;
-
-        float blockTopY = 2.0f;
         
-        for(unsigned int i = 0; i < 10; i++){
-            zPos = 0.0f;
-            for(unsigned int j = 0; j < 10; j++){
-                glm::vec3 modelPos = glm::vec3(xPos, 1.0f, zPos);
-                glm::mat4 model = glm::mat4(1.0f);
-                model = glm::translate(model, modelPos);
+        modelPos = glm::vec3(2.0f, 1.0f, 1.0f);
+        glm::mat4 model = glm::mat4(1.0f);
+        model = glm::translate(model, modelPos);
 
-                ourShader.setMat4("model", model);
+        ourShader.setMat4("model", model);
 
-                glDrawArrays(GL_TRIANGLES, 0, 36);
+        glDrawArrays(GL_TRIANGLES, 0, 36);
 
-                zPos += 1.0f;
-            
-                glm::vec3 blockPos = glm::vec3(i, 1.0f, j);
-
-                if(cameraPos.x > blockPos.x - 0.5f && cameraPos.x < blockPos.x + 0.5f &&
-                cameraPos.z > blockPos.z - 0.5f && cameraPos.z < blockPos.z + 0.5f &&
-                cameraPos.y <= blockTopY + 0.1f && playerVeloY <= 0.0f){
-                        
-                    onGround = true;
-                    cameraPos.y = blockTopY;
-                    playerVeloY = 0.0f;
-                    break; 
-            }
-        }
-            xPos += 1.0f;
-        }
+        onGround = true;
 
         glfwSwapBuffers(window);
         glfwPollEvents();
